@@ -52,7 +52,7 @@ export default function ProductDetailScreen() {
 
   const handleToggleFavorite = () => {
     if (product) {
-      toggleFavorite(product.id);
+      toggleFavorite(product.id, product);
     }
   };
 

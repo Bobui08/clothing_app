@@ -21,7 +21,7 @@ export const ProductCard = memo(({ product, onPress }: ProductCardProps) => {
   };
 
   const handleToggleFavorite = () => {
-    toggleFavorite(product.id);
+    toggleFavorite(product.id, product);
   };
 
   return (

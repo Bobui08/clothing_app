@@ -13,6 +13,7 @@ import { CartItem } from "@/components/ui/CartItem";
 import { PriceSummary } from "@/components/ui/PriceSummary";
 import { CartItem as CartItemType } from "@/types";
 import { useCart } from "../../hooks/useCart";
+import { TabsNavigator } from "@/components/ui/TabsNavigator";
 
 export default function CartScreen() {
   const router = useRouter();
@@ -111,44 +112,49 @@ export default function CartScreen() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      {/* Header */}
-      <View className="flex-row justify-between items-center p-4 bg-white border-b border-gray-200">
-        <Text className="text-xl font-bold text-gray-800">
-          Cart ({cart.totalItems} items)
-        </Text>
-        <TouchableOpacity onPress={handleClearCart}>
-          <Text className="text-red-500 font-medium">Clear All</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Cart Items */}
-      <FlatList
-        data={cart.items}
-        renderItem={renderCartItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ paddingVertical: 16 }}
-        showsVerticalScrollIndicator={false}
-      />
-
-      {/* Price Summary and Checkout */}
-      <View>
-        <PriceSummary
-          totalItems={cart.totalItems}
-          totalPrice={cart.totalPrice}
-        />
-
-        <View className="p-4 bg-white">
-          <TouchableOpacity
-            onPress={handleCheckout}
-            className="bg-blue-500 rounded-lg p-4"
-          >
-            <Text className="text-white text-center font-semibold text-lg">
-              Proceed to Checkout
-            </Text>
+    <View style={{ flex: 1 }}>
+      <SafeAreaView className="flex-1 bg-gray-50">
+        {/* Header */}
+        <View className="flex-row justify-between items-center p-4 bg-white border-b border-gray-200">
+          <Text className="text-xl font-bold text-gray-800">
+            Cart ({cart.items.length} items)
+          </Text>
+          <TouchableOpacity onPress={handleClearCart}>
+            <Text className="text-red-500 font-medium">Clear All</Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </SafeAreaView>
+
+        {/* Cart Items */}
+        <FlatList
+          data={cart.items}
+          renderItem={renderCartItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={{ paddingVertical: 16 }}
+          showsVerticalScrollIndicator={false}
+        />
+
+        {/* Price Summary and Checkout */}
+        <View>
+          <PriceSummary
+            totalItems={cart.totalItems}
+            totalPrice={cart.totalPrice}
+          />
+
+          <View className="p-4 bg-white">
+            <TouchableOpacity
+              onPress={handleCheckout}
+              className="bg-blue-500 rounded-lg p-4"
+            >
+              <Text className="text-white text-center font-semibold text-lg">
+                Proceed to Checkout
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
+
+      {/* Fixed Tabs at Bottom */}
+      <TabsNavigator />
+    </View>
   );
 }

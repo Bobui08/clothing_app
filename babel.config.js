@@ -7,6 +7,7 @@ module.exports = function (api) {
     ],
     plugins: [
       // Any other Babel plugins you need
+      "react-native-reanimated/plugin",
     ],
   };
 };
